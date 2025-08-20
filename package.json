@@ -4,10 +4,10 @@
   "type": "module",
   "homepage": "https://Davey-vS-02.github.io/TTAutoMechanicSite/",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+  "build": "vite build",
+  "dev": "vite",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d public/build"
   },
   "devDependencies": {
     "@inertiajs/vue3": "^2.0",

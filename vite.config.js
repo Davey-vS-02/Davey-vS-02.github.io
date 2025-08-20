@@ -4,9 +4,6 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   base: '/TTAutoMechanicSite/',
-  build: {
-    outDir: 'dist',
-  },
   plugins: [
     laravel({
       input: 'resources/js/app.js',
@@ -21,4 +18,5 @@ export default defineConfig({
       },
     }),
   ],
+  // no custom outDir, let Laravel Vite use public/build
 });

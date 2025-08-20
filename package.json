@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/package.json",
   "private": true,
   "type": "module",
-  "homepage": "https://<your-username>.github.io/<your-repo-name>/",
+  "homepage": "https://Davey-vS-02.github.io/TTAutoMechanicSite/",
   "scripts": {
     "build": "vite build",
     "dev": "vite",

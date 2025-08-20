@@ -18,5 +18,4 @@ export default defineConfig({
       },
     }),
   ],
-  // no custom outDir, let Laravel Vite use public/build
 });

@@ -7,7 +7,7 @@
   "build": "vite build",
   "dev": "vite",
   "predeploy": "echo 'predeploy step'",
-  "deploy": "gh-pages -d public/build"
+  "deploy": "gh-pages -d ."
   },
   "devDependencies": {
     "@inertiajs/vue3": "^2.0",

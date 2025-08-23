@@ -1,5 +1,5 @@
 # ------------------------------
-# Dockerfile for Laravel + Vite
+# Dockerfile for Laravel + Vite + Postgres
 # ------------------------------
 
 # 1️⃣ Use PHP FPM base image
@@ -13,12 +13,13 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libpq-dev \   # <-- Added for Postgres
     npm \
     zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 3️⃣ Install PHP extensions required by Laravel
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
 # 4️⃣ Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -39,5 +40,5 @@ RUN npm run build
 # 9️⃣ Expose port for Laravel
 EXPOSE 8000
 
-# 10️⃣ Start Laravel built-in server
-CMD ["sh", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"]
+# 🔟 Start Laravel built-in server with migrations
+CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"]

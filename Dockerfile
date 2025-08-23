@@ -40,4 +40,4 @@ RUN npm run build
 EXPOSE 8000
 
 # 10️⃣ Start Laravel built-in server
-CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT}"]
+CMD ["sh", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"]

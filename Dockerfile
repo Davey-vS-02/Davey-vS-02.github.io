@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libpq-dev \   # <-- Added for Postgres
+    libpq-dev \
     npm \
     zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

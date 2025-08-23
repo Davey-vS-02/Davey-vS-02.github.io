@@ -46,4 +46,4 @@ ENV APP_ENV=production
 ENV APP_DEBUG=false
 
 # 1️⃣1️⃣ Start Laravel built-in server with config clear and migrations
-CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"]
+CMD ["sh", "-c", "php artisan config:clear && php artisan view:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"]

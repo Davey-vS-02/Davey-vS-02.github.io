@@ -1,3 +1,6 @@
-node_modules
+/vendor
+/node_modules
+.env
 /public/storage
+/public/build
 /storage/*.key

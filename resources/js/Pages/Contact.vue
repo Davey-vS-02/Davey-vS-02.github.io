@@ -5,14 +5,15 @@
             <!-- Hero Section -->
             <v-parallax
                 src="/images/CarsLandingPageWallpaper2.jpeg"
-                height="70vh">
+                height="70vh"
+            >
                 <div class="parallax-overlay"></div>
-                <v-container class="parallax-content ml-14" fluid>
-                    <v-card class="mt-8" color="transparent" elevation="0">
-                        <v-card-title class="text-h6 text-white">
+                <v-container class="parallax-content ml-2 ml-md-14 pa-4 pa-md-0" fluid>
+                    <v-card class="mt-4 mt-md-8" color="transparent" elevation="0">
+                        <v-card-title class="text-h5 text-md-h4 text-white" color="white">
                             Contact Us
                         </v-card-title>
-                        <v-card-text class="text-h3 text-white">
+                        <v-card-text class="text-body-1 text-md-h6 text-white">
                             Get in touch with us:
                         </v-card-text>
                     </v-card>
@@ -20,9 +21,9 @@
             </v-parallax>
 
             <!-- About Us Details -->
-            <v-card class="ma-15 pa-8 rounded-lg" elevation="16">
-                <v-card-title class="text-h2">Contact Us</v-card-title>
-                <v-card-text class="text-h6">
+            <v-card class="ma-4 ma-md-15 pa-4 pa-md-8 rounded-lg" elevation="16">
+                <v-card-title class="text-h4 text-md-h2">Contact Us</v-card-title>
+                <v-card-text class="text-body-1 text-md-h6">
                     <strong>Head Office:</strong> 123 Main Street, Johannesburg, 2000<br>
                     <strong>Phone:</strong> +27 11 123 4567<br>
                     <strong>Email:</strong> info@ttautomechanic.co.za<br>

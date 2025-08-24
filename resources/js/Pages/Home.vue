@@ -3,55 +3,72 @@
         <app-nav></app-nav>
         <v-main>
             <v-parallax
-                src="/images/CarsLandingPageWallpaper2.jpeg"
-                height="100vh">
+            src="/images/CarsLandingPageWallpaper2.jpeg"
+            height="100vh"
+            >
                 <div class="parallax-overlay"></div>
-                <v-container class="parallax-content ml-14" fluid>
+                <v-container class="parallax-content pa-4 pa-md-14" fluid>
                     <v-card class="mt-8" color="transparent" elevation="0">
                         <v-card-title class="text-h6 text-white" color="white">
-                            TT Auto Mechanic Service & Repair (Pty) Ltd
+                            TT Auto Mechanic Service & Repair
                         </v-card-title>
-                        <v-card-text class="text-h2 text-white">
+                        <v-card-text class="text-h4 text-md-h2 text-white">
                             Driven by Trust. Powered by Skill.
                         </v-card-text>
                     </v-card>
 
-                    <v-btn prepend-icon="mdi-flag" color="white" size="large" variant="outlined" class="rounded-lg mt-8 ml-7" @click="openProductsPage">
+                    <v-btn
+                        prepend-icon="mdi-flag"
+                        color="white"
+                        size="large"
+                        variant="outlined"
+                        class="rounded-lg mt-8 ml-2 ml-md-7"
+                        @click="openProductsPage"
+                    >
                         Get started
                     </v-btn>
                 </v-container>
             </v-parallax>
 
-            <v-card class="ma-15 pa-4" color="transparent" elevation="0">
+            <v-card class="ma-4 ma-md-15 pa-4" color="transparent" elevation="0">
                 <v-card-title class="text-h6">Our Mission</v-card-title>
-                <v-card-text class="text-h4">
+                <v-card-text class="text-h5 text-md-h4">
                     At TT Auto Mechanic Service & Repair, our mission is to keep drivers safe and confident on the road by providing reliable, affordable, and high-quality automotive care. We are committed to honest service, expert craftsmanship, and building lasting trust with every customer, ensuring every vehicle leaves our workshop road-ready and performing at its best.
                 </v-card-text>
             </v-card>
 
-            <v-card class="ma-15 pa-4 rounded-lg" elevation="16">
-                <v-card-title class="text-h2">About us</v-card-title>
-                <v-card-text class="text-h6">
+            <v-card class="ma-4 ma-md-15 pa-4 rounded-lg" elevation="16">
+                <v-card-title class="text-h4 text-md-h2">About us</v-card-title>
+                <v-card-text class="text-body-1 text-md-h6">
                     TT Auto Mechanic Service & Repair is a proudly South African, Level 1 BEE-registered company dedicated to providing expert automotive service and repair. Our team combines experience, skill, and passion for cars to ensure every vehicle is cared for with precision and professionalism.
                     <br><br>
                     We are driven by values of trust, reliability, and integrity. Every customer can expect honest advice, fair pricing, and workmanship that prioritizes safety and performance. Our BEE Level 1 status reflects our commitment to inclusivity and empowerment, contributing to growth and opportunity within our community.
                     <br><br>
                     From routine maintenance to complex mechanical repairs, we ensure that every vehicle leaves our workshop road-ready, safe, and efficient. At TT Auto Mechanic Service & Repair, we don’t just fix cars — we build lasting relationships with our customers through quality service and care.
                 </v-card-text>
+
                 <v-container class="mb-5">
                     <v-row justify="center">
                         <v-col cols="auto">
-                            <v-btn prepend-icon="mdi-book" color="darkBackground" size="large" variant="tonal" class="rounded-lg mt-8 ml-7" @click="openAboutPage">
+                            <v-btn
+                                prepend-icon="mdi-book"
+                                color="darkBackground"
+                                size="large"
+                                variant="tonal"
+                                class="rounded-lg mt-6 mt-md-8 ml-0 ml-md-7"
+                                @click="openAboutPage"
+                            >
                                 Read More
                             </v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
 
-                <!-- <video-player :options="videoOptions" class="ml-12 mr-12 mb-12 pa-16"/> -->
+                <!-- <video-player :options="videoOptions" class="ml-4 ml-md-12 mr-4 mr-md-12 mb-4 mb-md-12 pa-4 pa-md-16"/> -->
             </v-card>
+
             <v-card class="pa-4 rounded-0" color="darkBackground" elevation="0">
-                <v-card-title class="text-h2">Why choose us:</v-card-title>
+                <v-card-title class="text-h4 text-md-h2">Why choose us:</v-card-title>
                 <v-card-text class="text-body-1">
                     Reliable service, honest advice, and expertise you can count on.
                 </v-card-text>
@@ -97,7 +114,7 @@
                             @mouseleave="isHovered3 = false"
                             :color="isHovered3 ? 'darkgray' : 'white'">
                             <v-icon class="mt-5 ml-5">mdi-handshake</v-icon>
-                            <v-card-title>Customer-Focused Service</v-card-title>
+                            <v-card-title>Customer-Focused</v-card-title>
                             <v-card-text>
                                 We prioritize honesty, transparency, and personalized care, building lasting relationships with every client by exceeding expectations at every visit.
                             </v-card-text>

@@ -3,7 +3,9 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-    base: process.env.VITE_ASSET_URL || '/',
+    // Base URL for built assets
+    base: (process.env.VITE_ASSET_URL || '/') + 'build/',
+
     plugins: [
         laravel({
             input: 'resources/js/app.js',

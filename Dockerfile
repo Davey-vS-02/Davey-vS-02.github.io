@@ -44,7 +44,8 @@ COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # 1️⃣1️⃣ Expose port 80 (Render detects this)
-EXPOSE 80
+EXPOSE 10000
 
 # 1️⃣2️⃣ Start PHP-FPM + Nginx (Nginx in foreground)
+RUN echo "listen = 127.0.0.1:9000" > /usr/local/etc/php-fpm.d/zz-docker.conf
 CMD /usr/sbin/nginx -g "daemon off;" & php-fpm -F

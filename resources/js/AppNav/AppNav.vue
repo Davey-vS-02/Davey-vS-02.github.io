@@ -9,9 +9,10 @@
         </v-icon>
         <v-toolbar-title 
             @click="navigateToHomePage()"
+            class="text-h6 text-xs-caption"
             style="cursor: pointer;"
         > 
-            TT Auto Mechanic Service & Repair
+            TT Auto
         </v-toolbar-title>
 
         <!-- Spacer pushes icons to the right -->

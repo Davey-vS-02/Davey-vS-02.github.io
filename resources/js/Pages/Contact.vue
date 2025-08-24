@@ -2,7 +2,6 @@
     <v-app>
         <app-nav></app-nav>
         <v-main>
-            <!-- Hero Section -->
             <v-parallax
                 src="/images/CarsLandingPageWallpaper2.jpeg"
                 height="70vh"

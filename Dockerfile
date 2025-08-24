@@ -1,12 +1,11 @@
 # ------------------------------
-# Dockerfile for Laravel + Vite + Postgres (Production)
+# Dockerfile: Laravel + Vite (Production)
 # ------------------------------
 
 # 1️⃣ Use PHP FPM base image
 FROM php:8.2-fpm
 
 # 2️⃣ Install system dependencies for PHP + Node
-# Added libpq-dev for Postgres support
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -34,16 +33,17 @@ COPY . .
 # 7️⃣ Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# 8️⃣ Install Node dependencies and build Vite assets for production
-RUN npm install
+# 8️⃣ Install Node dependencies and build Vite assets
+RUN npm ci
 RUN npm run build
 
-# 9️⃣ Expose port for Laravel
-EXPOSE 8000
+# 9️⃣ Clear Laravel caches
+RUN php artisan config:clear \
+    && php artisan route:clear \
+    && php artisan view:clear
 
-# 🔟 Set environment to production
-ENV APP_ENV=production
-ENV APP_DEBUG=false
+# 1️⃣0️⃣ Expose port (Render automatically sets PORT)
+EXPOSE 10000
 
-# 1️⃣1️⃣ Start Laravel built-in server with config clear and migrations
-CMD ["sh", "-c", "php artisan config:clear && php artisan view:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"]
+# 1️⃣1️⃣ Use PHP-FPM as the production entry point
+CMD ["php-fpm"]

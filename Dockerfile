@@ -1,67 +1,60 @@
 # ------------------------------
-# Stage 1: Build stage (PHP + Node for Vite)
+# Dockerfile for Laravel + Nginx + PHP-FPM (Production)
 # ------------------------------
-FROM php:8.2-fpm AS build
 
-# Install system dependencies
+# 1️⃣ Base image: PHP-FPM 8.2
+FROM php:8.2-fpm
+
+# 2️⃣ Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git unzip curl libpng-dev libonig-dev libxml2-dev libpq-dev npm zip \
+    git \
+    unzip \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libpq-dev \
+    npm \
+    zip \
+    nginx \
+    supervisor \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
+# 3️⃣ Install PHP extensions required by Laravel
 RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
 
-# Install Composer
+# 4️⃣ Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set working directory
+# 5️⃣ Set working directory
 WORKDIR /var/www/html
 
-# Copy PHP & Node dependencies first (for caching)
+# 6️⃣ Copy composer files first (for caching)
 COPY composer.json composer.lock ./
-COPY package.json package-lock.json ./ 
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader
-RUN npm install
+# 7️⃣ Install PHP dependencies without running scripts
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Copy the rest of the project
+# 8️⃣ Copy the rest of the project
 COPY . .
 
-# Build Vite assets for production
+# 9️⃣ Run post-install scripts now artisan exists
+RUN php artisan package:discover --ansi
+
+# 🔟 Install Node dependencies and build Vite assets
+RUN npm install
 RUN npm run build
 
-# ------------------------------
-# Stage 2: Production image (Nginx + PHP-FPM)
-# ------------------------------
-FROM php:8.2-fpm AS production
+# 1️⃣1️⃣ Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Install system dependencies for PHP
-RUN apt-get update && apt-get install -y libpng-dev libonig-dev libxml2-dev libpq-dev zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# 1️⃣2️⃣ Copy Nginx config
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
+# 1️⃣3️⃣ Expose port
+EXPOSE 80
 
-# Set working directory
-WORKDIR /var/www/html
+# 1️⃣4️⃣ Use Supervisor to run both PHP-FPM & Nginx
+COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Copy PHP code and vendor from build stage
-COPY --from=build /var/www/html /var/www/html
-
-# Copy Vite build assets
-COPY --from=build /var/www/html/public/build /var/www/html/public/build
-
-# Install Nginx
-RUN apt-get update && apt-get install -y nginx \
-    && rm -rf /var/lib/apt/lists/*
-
-# Configure Nginx
-RUN rm /etc/nginx/sites-enabled/default
-COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port for Render
-EXPOSE 10000
-
-# Start Nginx + PHP-FPM
-CMD ["sh", "-c", "php artisan config:clear && php artisan view:clear && php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"]
+CMD ["/usr/bin/supervisord", "-n"]

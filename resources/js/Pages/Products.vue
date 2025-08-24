@@ -7,12 +7,12 @@
                 height="70vh"
             >
                 <div class="parallax-overlay"></div>
-                <v-container class="parallax-content ml-14" fluid>
-                    <v-card class="mt-8" color="transparent" elevation="0">
-                        <v-card-title class="text-h4 text-white" color="white">
+                <v-container class="parallax-content ml-2 ml-md-14 pa-4 pa-md-0" fluid>
+                    <v-card class="mt-4 mt-md-8" color="transparent" elevation="0">
+                        <v-card-title class="text-h5 text-md-h4 text-white" color="white">
                             Services we offer
                         </v-card-title>
-                        <v-card-text class="text-h3 text-white">
+                        <v-card-text class="text-body-1 text-md-h6 text-white">
                             We take pride in our work:
                         </v-card-text>
                     </v-card>
@@ -21,7 +21,7 @@
 
             <v-container class="my-12">
                 <v-card class="pa-8 rounded-lg" elevation="8">
-                    <v-card-title class="text-h3 mb-4">Brands of car we specialize in:</v-card-title>
+                    <v-card-title class="text-h4 text-md-h2">Our services</v-card-title>
                     <v-card-text class="text-body-1 mb-6">
                         We specialize in servicing and repairing a wide range of car brands.
                     </v-card-text>

@@ -1,8 +1,8 @@
 # ------------------------------
-# Dockerfile for Laravel + Nginx + PHP-FPM (Production)
+# Laravel + PHP-FPM + Nginx (Production) for Render
 # ------------------------------
 
-# 1️⃣ Base image: PHP-FPM 8.2
+# 1️⃣ Base image
 FROM php:8.2-fpm
 
 # 2️⃣ Install system dependencies
@@ -17,10 +17,9 @@ RUN apt-get update && apt-get install -y \
     npm \
     zip \
     nginx \
-    supervisor \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 3️⃣ Install PHP extensions required by Laravel
+# 3️⃣ Install PHP extensions
 RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
 
 # 4️⃣ Install Composer globally
@@ -29,32 +28,23 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # 5️⃣ Set working directory
 WORKDIR /var/www/html
 
-# 6️⃣ Copy composer files first (for caching)
-COPY composer.json composer.lock ./
-
-# 7️⃣ Install PHP dependencies without running scripts
-RUN composer install --no-dev --optimize-autoloader --no-scripts
-
-# 8️⃣ Copy the rest of the project
+# 6️⃣ Copy project files
 COPY . .
 
-# 9️⃣ Run post-install scripts now artisan exists
-RUN php artisan package:discover --ansi
+# 7️⃣ Install PHP dependencies
+RUN composer install --optimize-autoloader --no-dev
 
-# 🔟 Install Node dependencies and build Vite assets
-RUN npm install
-RUN npm run build
+# 8️⃣ Build Vite assets
+RUN npm install && npm run build
 
-# 1️⃣1️⃣ Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# 1️⃣2️⃣ Copy Nginx config
+# 9️⃣ Copy Nginx config
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# 1️⃣3️⃣ Expose port
+# 1️⃣0️⃣ Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# 1️⃣1️⃣ Expose port 80 (Render detects this)
 EXPOSE 80
 
-# 1️⃣4️⃣ Use Supervisor to run both PHP-FPM & Nginx
-COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord", "-n"]
+# 1️⃣2️⃣ Start PHP-FPM + Nginx (Nginx in foreground)
+CMD php-fpm -D && nginx -g "daemon off;"

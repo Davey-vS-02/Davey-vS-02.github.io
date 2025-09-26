@@ -23,10 +23,8 @@
             <v-card class="ma-4 ma-md-15 pa-4 pa-md-8 rounded-lg" elevation="16">
                 <v-card-title class="text-h4 text-md-h2">Contact Us</v-card-title>
                 <v-card-text class="text-body-1 text-md-h6">
-                    <strong>Head Office:</strong> 123 Main Street, Johannesburg, 2000<br>
-                    <strong>Phone:</strong> +27 11 123 4567<br>
-                    <strong>Email:</strong> info@ttautomechanic.co.za<br>
-                    <strong>Business Hours:</strong> Mon – Fri: 08:00 – 17:00, Sat: 08:00 – 13:00
+                    <strong>Phone:</strong> +27 68 973 8631/+27 71 151 6837<br>
+                    <strong>Email:</strong> ttmachanicc1107@gmail.com
                 </v-card-text>
             </v-card>
         </v-main>
